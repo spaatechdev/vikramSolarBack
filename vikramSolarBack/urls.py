@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.static import serve
+from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('message_store', csrf_exempt(views.messageStore), name='message_store'),
     path('signin', views.signin, name='signin'),
     path('signup', views.signup, name='signup'),
 

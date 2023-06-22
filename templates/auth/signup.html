@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Login to {{project_name}}</title>
+    <title>Create you Account</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -35,16 +35,13 @@
 
     <!-- Extra css -->
     <script src="{% static 'js/jquery.min.js' %}"></script>
-    <!-- <style>
-        @media only screen and (max-width: 480px) {
-            
-        }
-    </style> -->
 </head>
 
 <body style="background-color: #fff;">
+
     <main>
         <div class="container">
+
             <section
                 class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
                 <div class="container">
@@ -65,57 +62,82 @@
                                     {% endif %}
                                     <span class="text-center text-danger" id="error_msg"></span>
                                     <div class="pt-4 pb-2">
-                                        <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                                        <p class="text-center small">Enter your email & password to login</p>
+                                        <h5 class="card-title text-center pb-0 fs-4">Create your Account</h5>
+                                        <p class="text-center small">Enter All The Details</p>
                                     </div>
-
-                                    <form id="login_form" class="row g-3 needs-validation" method="POST"
-                                        action="{% url 'signin' %}">
+                                    <form class="row g-3 needs-validation" id="register_form" method="POST"
+                                        action="{% url 'signup' %}">
                                         {% csrf_token %}
                                         <div class="col-12">
-                                            <label for="yourUsername" class="form-label">Email address</label>
+                                            <label for="first_name" class="form-label">First Name</label>
                                             <div class="input-group has-validation">
-                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="email" name="email" class="form-control" id="yourUsername"
-                                                    required>
-                                                <div class="invalid-feedback">Please enter your email address.</div>
+                                                <input type="text" class="form-control" id="first_name"
+                                                    name="first_name" required placeholder="John">
+                                                <div class="invalid-feedback">Please enter your First Name.</div>
                                             </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="last_name" class="form-label">Last Name</label>
+                                            <div class="input-group has-validation">
+                                                <input type="text" class="form-control" id="last_name" name="last_name"
+                                                    required placeholder="Doe">
+                                                <div class="invalid-feedback">Please enter your Last Name.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="phone" class="form-label">Phone</label>
+                                            <div class="input-group has-validation">
+                                                <input type="text" class="form-control" id="phone" name="phone" required
+                                                    placeholder="99******49"
+                                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                                    maxlength="10">
+                                                <div class="invalid-feedback">Please enter your Phone Number.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="email" class="form-label">Email</label>
+                                            <div class="input-group has-validation">
+                                                <input type="email" class="form-control" id="email" name="email"
+                                                    required placeholder="name@example.com">
+                                                <div class="invalid-feedback">Please enter your Email Address.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="password" class="form-label">Password</label>
+                                            <input type="password" name="password" class="form-control" id="password"
+                                                required>
+                                            <div class="invalid-feedback">Please enter your password!</div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="conf_password" class="form-label">Confirm Password</label>
+                                            <input type="password" name="conf_password" class="form-control"
+                                                id="conf_password" required>
+                                            <div class="invalid-feedback">Please enter your password again!</div>
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="yourPassword" class="form-label">Password</label>
-                                            <input type="password" name="password" class="form-control"
-                                                id="yourPassword" required>
-                                            <div class="invalid-feedback">Please enter your password!</div>
+                                            <button class="btn btn-primary w-100" type="submit">Sign Up</button>
                                         </div>
-
-                                        <div class="col-12 row">
-                                            <div class="col-6 mt-4">
-                                                <button class="btn btn-primary" type="submit">Signin</button>
-                                            </div>
-                                            <div class="col-6 mt-4">
-                                                <a href="#" class="auth-link">Forgot password?</a>
-                                            </div>
+                                        <div class="col-12">
+                                            <p class="small mb-0">Already Registered? <a href="{% url 'signin' %}">Click
+                                                    here to sign in</a></p>
                                         </div>
-                                        <!-- <div class="col-12">
-                                            <p class="small mb-0">Don't have account? <a
-                                                    href="{% url 'signup' %}">Create an account</a></p>
-                                        </div> -->
                                     </form>
 
                                 </div>
                             </div>
 
                             <div class="credits text-black">
-                                Developed by <a style="color: #5F861F;" href="https://spaatech.net/"><strong>SPAATech
-                                        Solutions
-                                        India Pvt. Ltd.</strong></a>
+                                Developed by <a style="color: #5F861F;" href="https://spaatech.net/"><strong>SPAATech Solutions
+                                    India Pvt. Ltd.</strong></a>
                             </div>
 
                         </div>
                     </div>
                 </div>
+
             </section>
+
         </div>
     </main>
     <!-- End #main -->
@@ -139,44 +161,17 @@
     <script src="{% static 'js/custom.js' %}"></script>
     {% block js %}
     <script>
-        $(document).on('submit', '#login_form', function (e) {
+        $('#register_form').on('submit', function (e) {
             e.preventDefault();
-            var formData = new FormData(login_form);
-            $.ajax({
-                type: "POST",
-                evalScripts: true,
-                contentType: false,
-                processData: false,
-                url: "{% url 'api:login' %}",
-                data: formData,
-                success: function (response) {
-                    login_user(response);
-                },
-                error: function (error) {
-                    message_store(error.responseJSON.detail, 'error');
-                }
-            });
+            password = $("#password").val();
+            conf_password = $("#conf_password").val();
+            if (password == conf_password) {
+                $('#register_form').unbind('submit').submit();
+                $('#register_form').submit();
+            } else {
+                $("#error_msg").text("Passwords do not match");
+            }
         });
-
-
-        function login_user(tokenDetails) {
-            $.ajax({
-                type: "POST",
-                url: "{% url 'api:login_user' %}",
-                data: ({ refreshToken: tokenDetails.refresh }),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': "Bearer " + tokenDetails.access,
-                },
-                success: function (login_response) {
-                    sessionStorage.setItem("accessToken", "Bearer " + tokenDetails.access);
-                    message_store(login_response.message, 'success', "{% url 'superuser:dashboard' %}");
-                },
-                error: function (error) {
-                    message_store(error.responseJSON.detail, 'error');
-                }
-            });
-        }
     </script>
     {% endblock %}
 </body>

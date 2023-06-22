@@ -1262,3 +1262,23 @@ h6 {
 .label-info {
   background-color: #5bc0de;
 }
+
+.error-message {
+  color: red;
+}
+
+.success-message {
+  color: green;
+}
+
+.debug-message {
+  color: purple;
+}
+
+.warning-message {
+  color: orange;
+}
+
+.info-message {
+  color: blue;
+}

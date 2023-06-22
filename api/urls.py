@@ -4,7 +4,10 @@ from . import views
 
 app_name='api'
 urlpatterns = [
-    path('token/', jwt_views.TokenObtainPairView.as_view(), name ='token_obtain_pair'),
-    path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name ='token_refresh'),
-    path('hello/', views.testPoint, name ='hello'),
+    path('login/', jwt_views.TokenObtainPairView.as_view(), name ='login'),
+    path('login/refresh/', jwt_views.TokenRefreshView.as_view(), name ='login_refresh'),
+
+    path('login-user/', views.loginUser, name ='login_user'),
+    path('get-user-details/', views.getUserDetails, name ='get_user_details'),
+    path('logout-user/', views.logoutUser, name ='logout_user'),
 ]

@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib import messages
+from django.http import JsonResponse
+
 import environ
 env = environ.Env()
 environ.Env.read_env()
@@ -8,8 +11,24 @@ context = {}
 context['project_name'] = env("PROJECT_NAME")
 context['client_name'] = env("CLIENT_NAME")
 
+def messageStore(request):
+    if request.POST['message_type'] == 'success':
+        messages.success(request, request.POST['message'])
+    elif request.POST['message_type'] == 'error':
+        messages.error(request, request.POST['message'])
+    elif request.POST['message_type'] == 'debug':
+        messages.debug(request, request.POST['message'])
+    elif request.POST['message_type'] == 'warning':
+        messages.warning(request, request.POST['message'])
+    else:
+        messages.info(request, request.POST['message'])
+    context.update({'message': "Flash Message Stored"})
+    return JsonResponse(context)
+
+
 def signin(request):
     return render(request, 'auth/signin.html', context)
+
 
 def signup(request):
     return render(request, 'auth/signup.html', context)
